@@ -101,7 +101,7 @@ template <> bool Raster<ushort>::write_pgmfile(const std::string& filename,Progr
       progress.step();
       for (const ushort* it=row->begin();it!=row->end();++it)
 	{
-	  const uchar p[2]={((*it)>>8),(*it)};
+	  const uchar p[2]={uchar((*it)>>8),uchar(*it)};
 	  if (m>=256)
 	    {
 	      // PGM spec is most significant byte first
