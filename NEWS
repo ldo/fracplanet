@@ -2,7 +2,7 @@ From release 0.4.0:
  - Bump version to 0.4.1
  - Fix linkage for Ubuntu Karmic.  Seems to work on Lenny too.
  - SourceForge platform upgrade.  Used:
-   svn switch --relocate https://fracplanet.svn.sourceforge.net/svnroot/fracplanet "svn+ssh://timday@svn.code.sf.net/p/fracplanet/code"
+     svn switch --relocate https://fracplanet.svn.sourceforge.net/svnroot/fracplanet "svn+ssh://timday@svn.code.sf.net/p/fracplanet/code"
 
 From release 0.3.3:
  - Bump version number to 0.4.0 (0.4.0dev while under development)
