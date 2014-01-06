@@ -1,5 +1,9 @@
 THANKS
 ======
+
+For update to blender export code for more recent blender:
+  Lawrence D'Oliveiro https://github.com/ldo
+
 For bug reports, feedback and patches:
   Tobias Klausmann 
   Frank Plohmann 

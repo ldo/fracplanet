@@ -40,7 +40,7 @@ const std::string XYZ::format_comma() const
 const std::string XYZ::format_blender() const
 {
   std::ostringstream s;
-  s << x << "," << y << "," << z;
+  s << x << ", " << y << ", " << z;
   return s.str();
 }
 
