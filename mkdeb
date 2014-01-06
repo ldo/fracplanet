@@ -1,7 +1,9 @@
 #!/bin/bash -ev
 
+# Based on instructions at https://wiki.debian.org/IntroDebianPackaging
+
 # Before using this you probably need to install
-#   sudo pbuilder yada devscripts lintian cdeboostrap (or debootstrap)
+#   sudo pbuilder devscripts lintian cdeboostrap (or debootstrap)
 # and maybe dpkg-sig.  Also:
 # set up for sudo
 # set up pbuilder with 
@@ -25,10 +27,9 @@ fi
 
 export DISTRIBUTION=`lsb_release -s -c`
 
-
 echo "*** Will package ${TARBALL} for distribution \"${DISTRIBUTION}\""
-echo -n "*** Starting in 10 seconds..."
-for t in 10 9 8 7 6 5 4 3 2 1 ; do sleep 1 ; echo -n "." ; done
+echo -n "*** Starting in 5 seconds..."
+for t in 5 4 3 2 1 ; do sleep 1 ; echo -n "." ; done
 
 PROJECT=`echo $TARBALL | sed 's/-.*//'`
 TARBALLORIG="${PROJECT}_${VER}.orig.tar.gz"
@@ -40,78 +41,65 @@ mkdir ${WORKDIR}
 cd ${WORKDIR}
 
 cp ../${TARBALL} ${TARBALLORIG}
-tar xvfz ${TARBALLORIG}
-mv ${PROJECT} ${PROJECT}-${VER}
-cd ${PROJECT}-${VER}
-sed -i "s/${VER}/${VER}-${REV}/g" VERSION
+
+tar xfz ${TARBALLORIG}
+
+if [! -d fracplanet-${VER} ] ; then
+    echo "Could't find fracplanet-${VER} after unpacking" ; 
+    exit ;
+fi
+
+cd fracplanet-${VER}
 
 mkdir debian
-echo "${PROJECT} (${VER}-${REV}) ${DISTRIBUTION}; urgency=low" > debian/changelog
-echo >> debian/changelog
-echo "  * Package created by ${PROJECT}'s mkdeb script." >> debian/changelog
-echo >> debian/changelog
-DATE=`date -R`
-echo " -- $USER <$EMAIL>  $DATE" >> debian/changelog
+dch --create -v ${VER}-1 --package fracplanet Create debian package from tarball
 
-# Presumably a dch -i here would increment revision
+echo "9" > debian/compat
 
-cat << EOF > debian/packages
+cat <<EOF > debian/control
 Source: fracplanet
 Section: graphics
-Priority: extra
-Maintainer: Tim Day <timday@bottlenose.demon.co.uk>
-Standards-Version: 3.6.1
-Upstream-Source: <URL:http://sourceforge.net/projects/fracplanet/index.htm>
-Home-Page: <URL:http://www.bottlenose.demon.co.uk/share/fracplanet>
-Description: Fractal terrain generator
-Copyright: GPL
- Copyright 2009 Tim Day
-Build-Depends: qt4-qmake,libqt4-dev,libqt4-opengl-dev,libboost-dev,libboost-program-options-dev,xsltproc
-Build: sh
- export QTDIR=/usr/share/qt4
- # Note: yada install deals with DEB_BUILD_OPTIONS 'nostrip'
- if [ "${DEB_BUILD_OPTIONS#*noopt}" != "$DEB_BUILD_OPTIONS" ]; then
-   ./configure "CONFIG -= release" "CONFIG += debug"
- else
-   ./configure # No noticeable advantage in overriding default qt optimisation options
- fi
- make
-Clean: sh
- make distclean || make clean || true
+Priority: optional
+Standards-Version: 3.9.4
+Maintainer: ${DEBEMAIL}
+Build-Depends: debhelper (>=9),qt4-qmake,libqt4-dev,libqt4-opengl-dev,libboost-dev,libboost-program-options-dev,xsltproc
+Homepage: http://www.bottlenose.demon.co.uk/share/fracplanet/
 
 Package: fracplanet
 Architecture: any
-Depends: []
-Suggests: povray,blender
+Depends: \${shlibs:Depends}, \${misc:Depends}
 Description: Fractal terrain generator
  Fracplanet generates random planets and terrain with oceans, 
  mountains, icecaps and rivers.  Parameters are specified interactively 
  and the results displayed using OpenGL.  The generated objects can be
  exported as geometry for Pov-Ray or Blender, or as textures.
-Install: sh
- yada install -bin fracplanet
- yada install -doc fracplanet.htm fracplanet.css
- yada install -doc BUGS TODO NEWS THANKS
- yada install -man man/man1/fracplanet.1
-Menu: ?package(fracplanet): needs="x11" section="Applications/Graphics" title="Fracplanet" command="/usr/bin/fracplanet" longtitle="Fractal terrain generator"
+Suggests: blender
+Homepage: http://www.bottlenose.demon.co.uk/share/fracplanet/
 EOF
 
-yada rebuild
+cp LICENSE debian/copyright
 
-cd ..
-dpkg-source -b ${PROJECT}-${VER} ${TARBALLORIG}
+echo '#!/usr/bin/make -f' > debian/rules
+echo '%:' >> debian/rules
+echo -e '\tdh $@' >> debian/rules
+chmod 755 debian/rules
 
-# Alternative but inferior approach is apparently to do 
-#   dpkg-buildpackage -rfakeroot
+mkdir debian/source
+echo "3.0 (quilt)" > debian/source/format
 
-mkdir result
-echo "Building package"
-sudo pbuilder build --buildresult ./result ${PROJECT}_${VER}-${REV}.dsc
+#debuild -us -uc -S   # -S just builds dsc
+debuild -us -uc -b
 
-sudo chown ${USER}:${USER} result/*
 
-RESULT=`(cd .. ; find ${WORKDIR} -name '*.deb')`
-echo "Results: ${RESULT}"
-echo "Don't forget to lintian ${RESULT}"
-echo 'Also dpkg-sig --sign builder -k $DPKGSIG_KEYID any .deb files'
+
+#mkdir result
+#echo "Building package"
+#sudo pbuilder build --buildresult ./result ${PROJECT}_${VER}-${REV}.dsc
+#
+#sudo chown ${USER}:${USER} result/*
+#
+#RESULT=`(cd .. ; find ${WORKDIR} -name '*.deb')`
+#echo "Results: ${RESULT}"
+#echo "Don't forget to lintian ${RESULT}"
+#echo 'Also dpkg-sig --sign builder -k $DPKGSIG_KEYID any .deb files'
 
