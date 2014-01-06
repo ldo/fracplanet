@@ -138,7 +138,7 @@ void TriangleMeshViewerDisplay::paintGL()
   GLfloat global_ambient[]={a,a,a,1.0};
   glLightModelfv(GL_LIGHT_MODEL_AMBIENT,global_ambient);
 
-  GLfloat light_diffuse[]={1.0-a,1.0-a,1.0-a,1.0};
+  GLfloat light_diffuse[]={1.0f-a,1.0f-a,1.0f-a,1.0};
   glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
 
   glMatrixMode(GL_MODELVIEW);
