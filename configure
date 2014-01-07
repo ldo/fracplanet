@@ -20,11 +20,11 @@ if ! xsltproc -stringparam version `./VERSION` -html htm_to_qml.xsl fracplanet.h
 if ! test -s usage_text.h ; then echo "\"Full built-in user documentation not available due to problem during build configuration.  Maybe the builder didn't have xsltproc or sed installed ?\"" > usage_text.h ; echo "Something went wrong, used built-in user documentation fallback plan"; fi
 echo "...built built-in user documentation"
 
-VERSION_NUMBER=`./VERSION` 
+VERSION_NUMBER=`./VERSION`
 
 echo
 echo "Running qmake-qt4..."
 
-qmake-qt4 "VERSION_NUMBER=$VERSION_NUMBER" "$@" fracplanet.pro
+qmake-qt4 -makefile "VERSION_NUMBER=$VERSION_NUMBER" "$*" fracplanet.pro
 
 echo "...configuration completed - ready to do 'make' now"

@@ -77,20 +77,36 @@ Suggests: blender
 Homepage: http://www.bottlenose.demon.co.uk/share/fracplanet/
 EOF
 
-cp LICENSE debian/copyright
+echo "Copyright 2014 ${DEBEMAIL}" > debian/copyright
+echo "GPL2 license; see /usr/share/common-licenses/GPL-2" >> debian/copyright
 
 echo '#!/usr/bin/make -f' > debian/rules
 echo '%:' >> debian/rules
 echo -e '\tdh $@' >> debian/rules
+echo '' >> debian/rules
+echo 'override_dh_auto_configure:' >> debian/rules
+echo -e '\tQTDIR=/usr/share/qt4 bash -c "`dpkg-buildflags --export=configure` ./configure"' >> debian/rules
+echo '' >> debian/rules
+echo 'override_dh_auto_install:' >> debian/rules
+echo -e '\tmkdir -p debian/fracplanet/usr/bin && cp fracplanet debian/fracplanet/usr/bin/' >> debian/rules
+echo -e '\tmkdir -p debian/fracplanet/usr/share/man/man1 && cp man/man1/fracplanet.1 debian/fracplanet/usr/share/man/man1/' >> debian/rules
+echo -e '\tmkdir -p debian/fracplanet/usr/share/doc/fracplanet && cp fracplanet.htm fracplanet.css BUGS TODO NEWS THANKS debian/fracplanet/usr/share/doc/fracplanet/' >> debian/rules
+
+cp fracplanet.menu debian/
+
 chmod 755 debian/rules
+
+echo <<EOF > debian/fracplanet.dirs
+/usr/bin
+/usr/share/man/man1
+/usr/share/doc/fracplanet
+EOF
 
 mkdir debian/source
 echo "3.0 (quilt)" > debian/source/format
 
 #debuild -us -uc -S   # -S just builds dsc
 debuild -us -uc -b
-
-
 
 #mkdir result
 #echo "Building package"

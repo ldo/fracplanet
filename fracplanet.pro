@@ -39,7 +39,15 @@ QMAKE_CXXFLAGS_RELEASE += -DQT_NO_ASCII_CAST
 QMAKE_CXXFLAGS_DEBUG += -DQT_NO_ASCII_CAST
 
 ######################################
+# Pick up any dpkg-buildflags flags via environment, release only
+# Not sure what happens if there are repeated/conflicting args
+QMAKE_CXXFLAGS_RELEASE += $$(CPPFLAGS) $$(CXXFLAGS)
+QMAKE_CFLAGS_RELEASE += $$(CPPFLAGS) $$(CFLAGS)
+QMAKE_LFLAGS += $$(LDFLAGS)
+
+######################################
 # Hide those crufty moc_ files away
 
 MOC_DIR = moc
 OBJECTS_DIR = obj
+
