@@ -8,7 +8,7 @@
 # set up for sudo
 # set up pbuilder with 
 #   sudo emacs -nw /etc/pbuilderrc
-#   ...change MIRRORSITE & DEBSECSERVER
+#   ...change MIRRORSITE
 #   sudo pbuilder create --distribution sarge/etch/whatever
 # and/or update with 
 #   sudo pbuilder update
@@ -52,7 +52,7 @@ fi
 cd fracplanet-${VER}
 
 mkdir debian
-dch --create -v ${VER}-1 --package fracplanet Create debian package from tarball
+dch --create -v ${VER}-${REV} --package fracplanet Create debian package from tarball
 
 echo "9" > debian/compat
 
@@ -105,17 +105,18 @@ EOF
 mkdir debian/source
 echo "3.0 (quilt)" > debian/source/format
 
-#debuild -us -uc -S   # -S just builds dsc
-debuild -us -uc -b
+debuild -us -uc -S  # -S just builds dsc.
+#debuild -us -uc -b  # Builds binary package, but not in isolated enironment.
 
-#mkdir result
-#echo "Building package"
-#sudo pbuilder build --buildresult ./result ${PROJECT}_${VER}-${REV}.dsc
-#
-#sudo chown ${USER}:${USER} result/*
-#
+cd ..
+
+echo ${PROJECT}_${VER}-${REV}.dsc
+ls -lh ${PROJECT}_${VER}-${REV}.dsc
+mkdir pbuilder
+sudo pbuilder --build --buildresult pbuilder ${PROJECT}_${VER}-${REV}.dsc
+sudo chown ${USER}:${USER} pbuilder/*
+
 #RESULT=`(cd .. ; find ${WORKDIR} -name '*.deb')`
 #echo "Results: ${RESULT}"
 #echo "Don't forget to lintian ${RESULT}"
 #echo 'Also dpkg-sig --sign builder -k $DPKGSIG_KEYID any .deb files'
-
