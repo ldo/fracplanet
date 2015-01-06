@@ -65,7 +65,7 @@ ControlRender::ControlRender(ParametersRender* param)
   connect(background_colour_high_button,SIGNAL(clicked()),
       this,SLOT(pickBackgroundColourHigh())
       );
-    
+
   QGroupBox* ambient_box=new QGroupBox("Ambient");
   layout()->addWidget(ambient_box);
   ambient_box->setLayout(new QHBoxLayout());
