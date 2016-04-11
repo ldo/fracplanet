@@ -1,3 +1,10 @@
+- Suggestions from HolgerOhmacht:
+
+1. missing equatorial mass distribution of rotational  spheric objects in space (by planet option)
+2. snow option check box
+3. maybe size of planet in textbox
+4. missing zoom slider
+
 - Suggestion from "floatingw" at 
   https://sourceforge.net/projects/fracplanet/forums/forum/239388/topic/3497745/index/page/1
   "I just realized that by saving the terrain and river seeds you're able to go back to a previous planet after you've pressed the "generate new seed" buttons. Still, I think that there ought to be a method to save all of the current settings in a custom fracplanet file format. That's probably in the roadmap and you just haven't gotten to it yet.
