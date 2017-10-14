@@ -8,7 +8,7 @@ PRECOMPILED_HEADER = precompiled.h
 
 HEADERS += $$system(ls *.h)
 SOURCES += $$system(ls *.cpp)
-LIBS += -lboost_program_options-mt -lGLU
+LIBS += -lboost_program_options -lGLU
 
 DEFINES += QT_DLL
 
