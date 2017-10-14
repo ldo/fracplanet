@@ -50,8 +50,6 @@ It also would be handy if the settings could be output as comments in the .pov a
   to produce generic version operating on general tuples ?
 - Craters.
 - X gets bigger when using display lists (remote only?) ?  Need to delete on exit ?
-- Find out what the errors are this guy mentions:
-    http://douglas.nerad.org/journal/2006/04/03/
 - More control over weather and clouds.
 - Another noise fn to modulate (c.f add) subdivided terrain.
   Might help reduce middle-of-continent highlands.
