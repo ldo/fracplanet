@@ -100,19 +100,19 @@ template <> bool Raster<ushort>::write_pgmfile(const std::string& filename,Progr
     {
       progress.step();
       for (const ushort* it=row->begin();it!=row->end();++it)
-    {
-      const uchar p[2]={((*it)>>8),(*it)};
-      if (m>=256)
-        {
-          // PGM spec is most significant byte first
-          out.write(reinterpret_cast<const char*>(p),2);
-        }
-      else
-        {
-          assert(p[0]==0);
-          out.write(reinterpret_cast<const char*>(p+1),1);
-        }
-    }
+	{
+	  const uchar p[2]={uchar((*it)>>8),uchar(*it)};
+	  if (m>=256)
+	    {
+	      // PGM spec is most significant byte first
+	      out.write(reinterpret_cast<const char*>(p),2);
+	    }
+	  else
+	    {
+	      assert(p[0]==0);
+	      out.write(reinterpret_cast<const char*>(p+1),1);
+	    }
+	}
     }
   out.close();
   return out.good();

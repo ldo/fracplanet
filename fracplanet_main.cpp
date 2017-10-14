@@ -345,7 +345,7 @@ void FracplanetMain::save_blender()
           "    tface = the_bmesh.faces.new((the_bmesh.verts[v0], the_bmesh.verts[v1], the_bmesh.verts[v2]))\n"
           "    tface.smooth = True\n"
           "    tface.material_index = material\n"
-          "    colors = {v0 : Color(tuple(c / 255 for c in c0[:3])), v1 : Color(tuple(c / 255 for c in c1[:3])), v2 : Color(tuple(c / 255 for c in c2[:3]))}\n"
+          "    colors = {v0 : Color(tuple(c / 255.0 for c in c0[:3])), v1 : Color(tuple(c / 255.0 for c in c1[:3])), v2 : Color(tuple(c / 255.0 for c in c2[:3]))}\n"
                  /* unfortunately, I can't do anything with alpha */
           "    for l in tface.loops :\n"
           "        l[color_layer] = colors[l.vert.index]\n"
