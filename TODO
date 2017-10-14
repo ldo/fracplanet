@@ -97,7 +97,6 @@ It also would be handy if the settings could be output as comments in the .pov a
 - Add perturbation decay rate for subdivision too.
 - Noise perturbation in X&Y too;
   might help break up subdivision ridge artefacts
-- Basic "man" page besides HTML
 - Make more keys do stuff in fly mode (e.g home to return to start).
 - Console mode app: read parameters, generate planet.
 - Fix river/lake hang for high subdivision levels
