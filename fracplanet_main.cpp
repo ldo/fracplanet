@@ -339,18 +339,32 @@ void FracplanetMain::save_blender()
             "#end v\n"
             "\n";
         out <<
-          "def f(material, v0, v1, v2, c0, c1, c2) :\n"
-          "  # adds a new face and associated vertex colours to the mesh.\n"
-          "    the_bmesh.verts.index_update()\n"
-          "    tface = the_bmesh.faces.new((the_bmesh.verts[v0], the_bmesh.verts[v1], the_bmesh.verts[v2]))\n"
-          "    tface.smooth = True\n"
-          "    tface.material_index = material\n"
-          "    colors = {v0 : Color(tuple(c / 255.0 for c in c0[:3])), v1 : Color(tuple(c / 255.0 for c in c1[:3])), v2 : Color(tuple(c / 255.0 for c in c2[:3]))}\n"
-                 /* unfortunately, I can't do anything with alpha */
-          "    for l in tface.loops :\n"
-          "        l[color_layer] = colors[l.vert.index]\n"
-          "    #end for\n"
-          "#end f\n\n";
+            "def vend() :\n"
+            "  # marks end of emission of vertices, and start of emission of faces.\n"
+            "    the_bmesh.verts.index_update()\n"
+            "    the_bmesh.verts.ensure_lookup_table()\n"
+            "#end vend\n"
+            "\n";
+        out <<
+            "def f(material, v0, v1, v2, c0, c1, c2) :\n"
+            "  # adds a new face and associated vertex colours to the mesh.\n"
+            "    try :\n"
+            "        tface = the_bmesh.faces.new((the_bmesh.verts[v0], the_bmesh.verts[v1], the_bmesh.verts[v2]))\n"
+            "    except ValueError :\n"
+                   /* face already exists? */
+            "        tface = None\n"
+            "    #end try\n"
+            "    if tface != None :\n"
+            "        tface.smooth = True\n"
+            "        tface.material_index = material\n"
+            "        colors = {v0 : Color(tuple(c / 255 for c in c0[:3])), v1 : Color(tuple(c / 255 for c in c1[:3])), v2 : Color(tuple(c / 255 for c in c2[:3]))}\n"
+                       /* unfortunately, I can't do anything with alpha */
+            "        for l in tface.loops :\n"
+            "            l[color_layer] = colors[l.vert.index]\n"
+            "        #end for\n"
+            "    #end if\n"
+            "#end f\n"
+            "\n";
 
         mesh_terrain->write_blender(out,parameters_save,parameters_terrain,"fracplanet");
         if (mesh_cloud) mesh_cloud->write_blender(out,parameters_save,parameters_cloud,"fracplanet");

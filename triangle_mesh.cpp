@@ -332,7 +332,10 @@ void TriangleMesh::write_blender(std::ofstream& out,const std::string& mesh_name
         out << "v(" << vertex(v).position().format_blender() << ")\n";
       }
 
-    out << "\n";
+    out <<
+        "\n"
+        "vend()\n"
+        "\n";
 
     for (uint t=0;t<triangles();t++)
       {
