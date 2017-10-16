@@ -374,6 +374,18 @@ void FracplanetMain::save_blender()
             "    nr_verts = 0\n"
             "#end mesh_piece_end\n"
             "\n";
+        out <<
+            "mat0 = bpy.data.materials.new(\"fracplanet0\")\n"
+            "mat0.diffuse_color = (0.0, 1.0, 0.0)\n"
+            "mat0.use_vertex_color_paint = True\n"
+            "bpy.ops.object.material_slot_add()\n"
+            "the_mesh_obj.material_slots[-1].material = mat0\n"
+            "mat1 = bpy.data.materials.new(\"fracplanet1\")\n"
+            "mat1.diffuse_color = (0.0, 0.0, 1.0)\n"
+            "mat1.use_vertex_color_paint = True\n"
+            "bpy.ops.object.material_slot_add()\n"
+            "the_mesh_obj.material_slots[-1].material = mat1\n"
+            "\n";
 
         mesh_terrain->write_blender(out,parameters_save,parameters_terrain,"fracplanet");
         if (mesh_cloud) mesh_cloud->write_blender(out,parameters_save,parameters_cloud,"fracplanet");
