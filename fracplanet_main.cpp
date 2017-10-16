@@ -333,9 +333,14 @@ void FracplanetMain::save_blender()
             "the_bmesh = bmesh.new()\n"
             "color_layer = the_bmesh.loops.layers.color.new(\"Col\") # same name as used by Blender\n"
             "\n"
+            "nr_verts = 0\n"
+            "verts_index_base = 0\n"
+            "\n"
             "def v(x, y, z) :\n"
             "  # adds a new vertex to the mesh.\n"
+            "    global nr_verts\n"
             "    the_bmesh.verts.new((x, y, z))\n"
+            "    nr_verts += 1\n"
             "#end v\n"
             "\n";
         out <<
@@ -348,22 +353,26 @@ void FracplanetMain::save_blender()
         out <<
             "def f(material, v0, v1, v2, c0, c1, c2) :\n"
             "  # adds a new face and associated vertex colours to the mesh.\n"
-            "    try :\n"
-            "        tface = the_bmesh.faces.new((the_bmesh.verts[v0], the_bmesh.verts[v1], the_bmesh.verts[v2]))\n"
-            "    except ValueError :\n"
-                   /* face already exists? */
-            "        tface = None\n"
-            "    #end try\n"
-            "    if tface != None :\n"
-            "        tface.smooth = True\n"
-            "        tface.material_index = material\n"
-            "        colors = {v0 : Color(tuple(c / 255 for c in c0[:3])), v1 : Color(tuple(c / 255 for c in c1[:3])), v2 : Color(tuple(c / 255 for c in c2[:3]))}\n"
-                       /* unfortunately, I can't do anything with alpha */
-            "        for l in tface.loops :\n"
-            "            l[color_layer] = colors[l.vert.index]\n"
-            "        #end for\n"
-            "    #end if\n"
+            "    v0 += verts_index_base\n"
+            "    v1 += verts_index_base\n"
+            "    v2 += verts_index_base\n"
+            "    tface = the_bmesh.faces.new((the_bmesh.verts[v0], the_bmesh.verts[v1], the_bmesh.verts[v2]))\n"
+            "    tface.smooth = True\n"
+            "    tface.material_index = material\n"
+            "    colors = {v0 : Color(tuple(c / 255 for c in c0[:3])), v1 : Color(tuple(c / 255 for c in c1[:3])), v2 : Color(tuple(c / 255 for c in c2[:3]))}\n"
+                   /* unfortunately, I can't do anything with alpha */
+            "    for l in tface.loops :\n"
+            "        l[color_layer] = colors[l.vert.index]\n"
+            "    #end for\n"
             "#end f\n"
+            "\n";
+        out <<
+            "def mesh_piece_end() :\n"
+            "  # marks end of a discontiguous piece of the mesh.\n"
+            "    global nr_verts, verts_index_base\n"
+            "    verts_index_base += nr_verts\n"
+            "    nr_verts = 0\n"
+            "#end mesh_piece_end\n"
             "\n";
 
         mesh_terrain->write_blender(out,parameters_save,parameters_terrain,"fracplanet");

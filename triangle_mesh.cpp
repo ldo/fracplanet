@@ -356,6 +356,7 @@ void TriangleMesh::write_blender(std::ofstream& out,const std::string& mesh_name
       << "(" << blender_alpha_workround(byte_faux_alpha.get(),vertex(v2).colour(c)).format_comma() << ")"
       << ")\n";
       }
+    out << "mesh_piece_end()\n";
 
     std::ostringstream msg;
     msg << "Wrote mesh " << mesh_name << " to Blender script file";
