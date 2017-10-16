@@ -335,6 +335,7 @@ void FracplanetMain::save_blender()
             "\n"
             "nr_verts = 0\n"
             "verts_index_base = 0\n"
+            "material_index_base = 0\n"
             "\n"
             "def v(x, y, z) :\n"
             "  # adds a new vertex to the mesh.\n"
@@ -358,7 +359,7 @@ void FracplanetMain::save_blender()
             "    v2 += verts_index_base\n"
             "    tface = the_bmesh.faces.new((the_bmesh.verts[v0], the_bmesh.verts[v1], the_bmesh.verts[v2]))\n"
             "    tface.smooth = True\n"
-            "    tface.material_index = material\n"
+            "    tface.material_index = material + material_index_base\n"
             "    colors = {v0 : Color(tuple(c / 255 for c in c0[:3])), v1 : Color(tuple(c / 255 for c in c1[:3])), v2 : Color(tuple(c / 255 for c in c2[:3]))}\n"
                    /* unfortunately, I can't do anything with alpha */
             "    for l in tface.loops :\n"
@@ -374,21 +375,44 @@ void FracplanetMain::save_blender()
             "    nr_verts = 0\n"
             "#end mesh_piece_end\n"
             "\n";
+      /* TODO: option for Cycles materials? */
         out <<
-            "mat0 = bpy.data.materials.new(\"fracplanet0\")\n"
-            "mat0.diffuse_color = (0.0, 1.0, 0.0)\n"
-            "mat0.use_vertex_color_paint = True\n"
+            "material = bpy.data.materials.new(\"fracplanet0\") # land\n"
+            "material.diffuse_color = (0.0, 1.0, 0.0)\n"
+            "material.use_vertex_color_paint = True\n"
+            "material.use_transparent_shadows = True # needed if I have clouds\n"
             "bpy.ops.object.material_slot_add()\n"
-            "the_mesh_obj.material_slots[-1].material = mat0\n"
-            "mat1 = bpy.data.materials.new(\"fracplanet1\")\n"
-            "mat1.diffuse_color = (0.0, 0.0, 1.0)\n"
-            "mat1.use_vertex_color_paint = True\n"
+            "the_mesh_obj.material_slots[-1].material = material\n"
+            "material = bpy.data.materials.new(\"fracplanet1\") # sea\n"
+            "material.diffuse_color = (0.0, 0.0, 1.0)\n"
+            "material.use_vertex_color_paint = True\n"
+            "material.use_transparent_shadows = True # needed if I have clouds\n"
             "bpy.ops.object.material_slot_add()\n"
-            "the_mesh_obj.material_slots[-1].material = mat1\n"
+            "the_mesh_obj.material_slots[-1].material = material\n";
+        if (mesh_cloud != NULL)
+          {
+            out <<
+                "material = bpy.data.materials.new(\"fracplanet2\") # clouds\n"
+                "material.diffuse_color = (0.0, 0.0, 0.0)\n"
+                "material.use_vertex_color_paint = True\n"
+                "material.use_transparency = True\n"
+                "material.transparency_method = \"Z_TRANSPARENCY\"\n"
+                "material.alpha = 0.3 # good enough to begin with\n"
+                "bpy.ops.object.material_slot_add()\n"
+                "the_mesh_obj.material_slots[-1].material = material\n";
+          } /*if*/
+        out <<
             "\n";
 
         mesh_terrain->write_blender(out,parameters_save,parameters_terrain,"fracplanet");
-        if (mesh_cloud) mesh_cloud->write_blender(out,parameters_save,parameters_cloud,"fracplanet");
+        if (mesh_cloud)
+          {
+            out <<
+                "\n"
+                "material_index_base = 2\n"
+                "\n";
+            mesh_cloud->write_blender(out,parameters_save,parameters_cloud,"fracplanet");
+          } /*if*/
 
         out <<
             "the_bmesh.normal_update()\n"
