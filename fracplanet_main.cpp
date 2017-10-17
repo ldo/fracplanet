@@ -377,7 +377,6 @@ void FracplanetMain::save_blender()
             "    nr_verts = 0\n"
             "#end mesh_piece_end\n"
             "\n";
-      /* TODO: option for Cycles materials? */
         out <<
             "material = bpy.data.materials.new(\"fracplanet_land\") # land\n"
             "material.diffuse_color = (0.0, 1.0, 0.0)\n"
@@ -395,11 +394,42 @@ void FracplanetMain::save_blender()
           {
             out <<
                 "material = bpy.data.materials.new(\"fracplanet_clouds\") # clouds\n"
-                "material.diffuse_color = (0.0, 0.0, 0.0)\n"
+                "material.diffuse_color = (1.0, 1.0, 1.0)\n"
                 "material.use_vertex_color_paint = True\n"
                 "material.use_transparency = True\n"
                 "material.transparency_method = \"Z_TRANSPARENCY\"\n"
-                "material.alpha = 0.3 # good enough to begin with\n"
+                "material.alpha = 0.3 # good enough to begin with\n";
+            if (parameters_save.blender_cycles_materials)
+              {
+                out <<
+                    "material.use_nodes = True\n"
+                    "material_tree = material.node_tree\n"
+                    "for node in list(material_tree.nodes) :\n"
+                    "  # clear out default nodes\n"
+                    "    material_tree.nodes.remove(node)\n"
+                    "#end for\n"
+                    "layer_color = material_tree.nodes.new(\"ShaderNodeAttribute\")\n"
+                    "layer_color.attribute_name = \"Col\"\n"
+                    "layer_color.location = (-200, 0)\n"
+                    "layer_alpha = material_tree.nodes.new(\"ShaderNodeAttribute\")\n"
+                    "layer_alpha.attribute_name = \"Alpha\"\n"
+                    "layer_alpha.location = (-200, 150)\n"
+                    "transp_shader = material_tree.nodes.new(\"ShaderNodeBsdfTransparent\")\n"
+                    "transp_shader.location = (0, 200)\n"
+                    "color_shader = material_tree.nodes.new(\"ShaderNodeBsdfDiffuse\")\n"
+                    "color_shader.location = (0, 0)\n"
+                    "material_tree.links.new(layer_color.outputs[0], color_shader.inputs[0])\n"
+                    "mix_shader = material_tree.nodes.new(\"ShaderNodeMixShader\")\n"
+                    "mix_shader.location = (200, 50)\n"
+                    "material_tree.links.new(layer_alpha.outputs[0], mix_shader.inputs[0])\n"
+                    "material_tree.links.new(transp_shader.outputs[0], mix_shader.inputs[1])\n"
+                    "material_tree.links.new(color_shader.outputs[0], mix_shader.inputs[2])\n"
+                    "material_tree.links.new(layer_color.outputs[0], color_shader.inputs[0])\n"
+                    "material_output = material_tree.nodes.new(\"ShaderNodeOutputMaterial\")\n"
+                    "material_output.location = (400, 50)\n"
+                    "material_tree.links.new(mix_shader.outputs[0], material_output.inputs[0])\n";
+              } /*if*/
+            out <<
                 "bpy.ops.object.material_slot_add()\n"
                 "the_mesh_obj.material_slots[-1].material = material\n";
           } /*if*/

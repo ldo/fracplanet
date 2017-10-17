@@ -64,6 +64,15 @@ ControlSave::ControlSave(FracplanetMain* save_target,ParametersSave* param)
   tabs->addTab(tab_blender,"Blender");
   tab_blender->setLayout(new QVBoxLayout());
 
+  QCheckBox*const blender_cycles_materials=new QCheckBox("Generate Blender Cycles Material (for clouds)");
+  tab_blender->layout()->addWidget(blender_cycles_materials);
+  blender_cycles_materials->setChecked(parameters->blender_cycles_materials);
+  blender_cycles_materials->setToolTip("Unfortunately Blender seems to ignore alpha components supplied with per-vertex\ncolours so a workround is normally used.\nCheck this box to save as if per-vertex alpha worked.");
+  connect(
+      blender_cycles_materials,SIGNAL(stateChanged(int)),
+      this,SLOT(setBlenderCycles(int))
+      );
+
   QPushButton*const save_blender=new QPushButton("Save for Blender");
   tab_blender->layout()->addWidget(save_blender);
   save_blender->setToolTip("Press to save object for Blender");
@@ -123,6 +132,12 @@ void ControlSave::setSeaSphere(int v)
 {
   parameters->pov_sea_object=(v==2);
 }
+
+void ControlSave::setBlenderCycles(int v)
+{
+  parameters->blender_cycles_materials=(v==2);
+}
+
 
 void ControlSave::setTextureShaded(int v)
 {

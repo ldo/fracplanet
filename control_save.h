@@ -45,6 +45,7 @@ class ControlSave : public Control
 
   void setAtmosphere(int v);
   void setSeaSphere(int v);
+  void setBlenderCycles(int v);
   void setTextureShaded(int v);
   void setTextureHeight(int v);
 

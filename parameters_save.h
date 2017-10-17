@@ -43,6 +43,9 @@ class ParametersSave
   //! Whether to emit a single sea-level object to POV file.
   bool pov_sea_object;
 
+  bool blender_cycles_materials;
+  /* whether to generate materials for Blender Cycles renderer */
+
   //! Whether textures should include shading.
   bool texture_shaded;
 
