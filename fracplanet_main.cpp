@@ -404,7 +404,7 @@ void FracplanetMain::save_blender()
                 out <<
                     "material.use_nodes = True\n"
                     "material_tree = material.node_tree\n"
-                    "for node in list(material_tree.nodes) :\n"
+                    "for node in material_tree.nodes :\n"
                     "  # clear out default nodes\n"
                     "    material_tree.nodes.remove(node)\n"
                     "#end for\n"
@@ -427,7 +427,10 @@ void FracplanetMain::save_blender()
                     "material_tree.links.new(layer_color.outputs[0], color_shader.inputs[0])\n"
                     "material_output = material_tree.nodes.new(\"ShaderNodeOutputMaterial\")\n"
                     "material_output.location = (400, 50)\n"
-                    "material_tree.links.new(mix_shader.outputs[0], material_output.inputs[0])\n";
+                    "material_tree.links.new(mix_shader.outputs[0], material_output.inputs[0])\n"
+                    "for node in material_tree.nodes :\n"
+                    "    node.select = False\n"
+                    "#end for\n";
               } /*if*/
             out <<
                 "bpy.ops.object.material_slot_add()\n"
