@@ -377,13 +377,13 @@ void FracplanetMain::save_blender()
             "\n";
       /* TODO: option for Cycles materials? */
         out <<
-            "material = bpy.data.materials.new(\"fracplanet0\") # land\n"
+            "material = bpy.data.materials.new(\"fracplanet_land\") # land\n"
             "material.diffuse_color = (0.0, 1.0, 0.0)\n"
             "material.use_vertex_color_paint = True\n"
             "material.use_transparent_shadows = True # needed if I have clouds\n"
             "bpy.ops.object.material_slot_add()\n"
             "the_mesh_obj.material_slots[-1].material = material\n"
-            "material = bpy.data.materials.new(\"fracplanet1\") # sea\n"
+            "material = bpy.data.materials.new(\"fracplanet_sea\") # sea\n"
             "material.diffuse_color = (0.0, 0.0, 1.0)\n"
             "material.use_vertex_color_paint = True\n"
             "material.use_transparent_shadows = True # needed if I have clouds\n"
@@ -392,7 +392,7 @@ void FracplanetMain::save_blender()
         if (mesh_cloud != NULL)
           {
             out <<
-                "material = bpy.data.materials.new(\"fracplanet2\") # clouds\n"
+                "material = bpy.data.materials.new(\"fracplanet_clouds\") # clouds\n"
                 "material.diffuse_color = (0.0, 0.0, 0.0)\n"
                 "material.use_vertex_color_paint = True\n"
                 "material.use_transparency = True\n"
