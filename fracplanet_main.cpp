@@ -331,7 +331,8 @@ void FracplanetMain::save_blender()
             "the_mesh = the_mesh_obj.data\n"
             "the_mesh.name = \"fracplanet\"\n"
             "the_bmesh = bmesh.new()\n"
-            "color_layer = the_bmesh.loops.layers.color.new(\"Col\") # same name as used by Blender\n"
+            "color_layer = the_bmesh.loops.layers.color.new(\"Col\") # same as default used by Blender\n"
+            "alpha_layer = the_bmesh.loops.layers.color.new(\"Alpha\") # could be used in a node-based material\n"
             "\n"
             "nr_verts = 0\n"
             "verts_index_base = 0\n"
@@ -361,9 +362,10 @@ void FracplanetMain::save_blender()
             "    tface.smooth = True\n"
             "    tface.material_index = material + material_index_base\n"
             "    colors = {v0 : Color(tuple(c / 255 for c in c0[:3])), v1 : Color(tuple(c / 255 for c in c1[:3])), v2 : Color(tuple(c / 255 for c in c2[:3]))}\n"
-                   /* unfortunately, I can't do anything with alpha */
+            "    alphas = {v0 : Color((c0[3] / 255,) * 3), v1 : Color((c1[3] / 255,) * 3), v2 : Color((c2[3],) * 3)}\n"
             "    for l in tface.loops :\n"
             "        l[color_layer] = colors[l.vert.index]\n"
+            "        l[alpha_layer] = alphas[l.vert.index]\n"
             "    #end for\n"
             "#end f\n"
             "\n";

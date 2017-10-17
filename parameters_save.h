@@ -43,9 +43,6 @@ class ParametersSave
   //! Whether to emit a single sea-level object to POV file.
   bool pov_sea_object;
 
-  //! Whether to try using per-vertex-alpha in the blender output.
-  bool blender_per_vertex_alpha;
-
   //! Whether textures should include shading.
   bool texture_shaded;
 

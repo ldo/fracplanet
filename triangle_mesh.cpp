@@ -299,11 +299,8 @@ void TriangleMesh::write_povray(std::ofstream& out,bool exclude_alternate_colour
 /*! If faux_alpha is null, output per-vertex alpha.
   If a colour is specified, use the vertex alpha to blend with it.
  */
-void TriangleMesh::write_blender(std::ofstream& out,const std::string& mesh_name,const FloatRGBA* faux_alpha) const
+void TriangleMesh::write_blender(std::ofstream& out,const std::string& mesh_name) const
   {
-    std::auto_ptr<ByteRGBA> byte_faux_alpha;
-    if (faux_alpha) byte_faux_alpha=std::auto_ptr<ByteRGBA>(new ByteRGBA(*faux_alpha));
-
     const uint steps=vertices()+triangles();
     uint step=0;
 
@@ -339,9 +336,9 @@ void TriangleMesh::write_blender(std::ofstream& out,const std::string& mesh_name
       << v0 << ", "
       << v1 << ", "
       << v2 << ", "
-      << "(" << blender_alpha_workround(byte_faux_alpha.get(),vertex(v0).colour(c)).format_comma() << "), "
-      << "(" << blender_alpha_workround(byte_faux_alpha.get(),vertex(v1).colour(c)).format_comma() << "), "
-      << "(" << blender_alpha_workround(byte_faux_alpha.get(),vertex(v2).colour(c)).format_comma() << ")"
+      << "(" << vertex(v0).colour(c).format_comma() << "), "
+      << "(" << vertex(v1).colour(c).format_comma() << "), "
+      << "(" << vertex(v2).colour(c).format_comma() << ")"
       << ")\n";
       }
     out << "mesh_piece_end()\n";
@@ -350,23 +347,6 @@ void TriangleMesh::write_blender(std::ofstream& out,const std::string& mesh_name
     msg << "Wrote mesh " << mesh_name << " to Blender script file";
     progress_complete(msg.str());
   } /*TriangleMesh::write_blender*/
-
-ByteRGBA TriangleMesh::blender_alpha_workround(const ByteRGBA* f,const ByteRGBA& c)
-{
-  if (f)
-    {
-      const uint ia=static_cast<uint>(c.a);
-      return ByteRGBA
-    (
-     (ia*c.r+(255-ia)*f->r)/255,
-     (ia*c.g+(255-ia)*f->g)/255,
-     (ia*c.b+(255-ia)*f->b)/255,
-     255
-     );
-    }
-  else
-    return c;
-}
 
 TriangleMeshFlat::TriangleMeshFlat(ParametersObject::ObjectType obj,float z,uint seed,Progress* progress)
 :TriangleMesh(progress)

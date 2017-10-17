@@ -191,7 +191,7 @@ public:
   void write_povray(std::ofstream& out,bool exclude_alternate_colour,bool double_illuminate,bool no_shadow) const;
 
   //! Dump the mesh to the file in a form suitable for use by Blender.
-  void write_blender(std::ofstream& out,const std::string& mesh_name,const FloatRGBA* fake_alpha) const;
+  void write_blender(std::ofstream& out,const std::string& mesh_name) const;
 
  protected:
 
@@ -235,9 +235,6 @@ public:
   void progress_complete(const std::string& info) const;
 
  private:
-
-  //! Fake per-vertex alpha for Blender.
-  static ByteRGBA blender_alpha_workround(const ByteRGBA*,const ByteRGBA&);
 };
 
 //! A single triangle lying in the z-plane.

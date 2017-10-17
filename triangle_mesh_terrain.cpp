@@ -425,7 +425,7 @@ void TriangleMeshTerrain::do_terrain(const ParametersTerrain& parameters)
 
 void TriangleMeshTerrain::write_blender(std::ofstream& out,const ParametersSave&,const ParametersTerrain&,const std::string& mesh_name) const
 {
-  TriangleMesh::write_blender(out,mesh_name+".terrain",0);
+  TriangleMesh::write_blender(out,mesh_name+".terrain");
 }
 
 namespace
