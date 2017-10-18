@@ -79,7 +79,6 @@ It also would be handy if the settings could be output as comments in the .pov a
 - Scale parameter for blender output.
 - Ability to load/save fracplanet parameters (simple keyword=value text file)
 - Mesh optimisation.
-- Save clouds as some more blender-friendly texture type thing.
 - Rename Save to Export.
   (Eventually want Save/Load/Export POV-Ray/Export Blender/Export Texture/Import Texture).
 - Cloud controls.  Noise parameters and thresholds.
