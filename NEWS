@@ -1,5 +1,5 @@
 In 0.5.0:
- - Verified works with Qt 5.9.1
+ - Verified works with Qt 5.9.1 ("official" Qt release) and g++ 6.3.0 (Debian Stretch version)
  - Ditch use of precompiled headers; compilers are awesome these days.
  - Increase initial subdivision level to 8.
 

@@ -64,7 +64,7 @@ template <> bool Raster<uchar>::write_pgmfile(const std::string& filename,Progre
       out.write(reinterpret_cast<const char*>(&(*(row->begin()))),row->size());
     }
   out.close();
-  return out;
+  return static_cast<bool>(out);
 }
 
 template <> bool Raster<ushort>::write_pgmfile(const std::string& filename,Progress* target) const
@@ -94,7 +94,7 @@ template <> bool Raster<ushort>::write_pgmfile(const std::string& filename,Progr
 	}
     }
   out.close();
-  return out;
+  return static_cast<bool>(out);
 }
 
 template <> bool Raster<ByteRGBA>::write_ppmfile(const std::string& filename,Progress* target) const
@@ -111,7 +111,7 @@ template <> bool Raster<ByteRGBA>::write_ppmfile(const std::string& filename,Pro
 	out.write(reinterpret_cast<const char*>(&((*it).r)),3);
     }
   out.close();
-  return out;
+  return static_cast<bool>(out);
 }
 
 
