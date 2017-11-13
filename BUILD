@@ -1,6 +1,7 @@
 #!/bin/bash
 
-PATH=$QTDIR/bin:$PATH
-export PATH
+echo "Using QTDIR=${QTDIR}"
 
-./configure $@ && make
+export PATH=${QTDIR}/bin:${PATH}
+
+./configure $@ && make -j 8

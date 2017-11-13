@@ -7,8 +7,8 @@ if [ -z "$QTDIR" ] ; then
   exit 1
 fi
 
-echo "Your qmake-qt4 version is:"
-qmake-qt4 --version
+echo "Your qmake version is:"
+qmake --version
  
 echo
 echo "Your gcc version is (unless qmake is set up to use a different one):"
@@ -23,8 +23,8 @@ echo "...built built-in user documentation"
 VERSION_NUMBER=`./VERSION`
 
 echo
-echo "Running qmake-qt4..."
+echo "Running qmake..."
 
-qmake-qt4 -makefile "VERSION_NUMBER=$VERSION_NUMBER" "$*" fracplanet.pro
+qmake -makefile "VERSION_NUMBER=$VERSION_NUMBER" "$*" fracplanet.pro
 
 echo "...configuration completed - ready to do 'make' now"

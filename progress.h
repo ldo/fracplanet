@@ -24,6 +24,8 @@
 #ifndef _progress_h_
 #define _progress_h_
 
+#include "common.h"
+
 //! Mix-in class for call-backs from long operations.
 /*! Use concrete implementations of these methods to drive progress bars.
  */

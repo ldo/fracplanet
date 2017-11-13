@@ -21,8 +21,6 @@
   \brief Implementation of Noise class
 */
 
-#include "precompiled.h"
-
 #include "noise.h"
 
 Noise::Noise(uint seed)

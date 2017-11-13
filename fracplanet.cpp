@@ -28,8 +28,6 @@
   \todo For new features to be added, see the TODO file.
  */
 
-#include "precompiled.h"
-
 #include "fracplanet_main.h"
 
 //! Application code

@@ -24,6 +24,7 @@
 #ifndef _parameters_render_h_
 #define _parameters_render_h_
 
+#include "common.h"
 #include "rgb.h"
 
 class XYZ;

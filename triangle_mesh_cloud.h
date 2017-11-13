@@ -24,6 +24,7 @@
 #ifndef _triangle_mesh_cloud_h_
 #define _triangle_mesh_cloud_h_
 
+#include "common.h"
 #include "image.h"
 #include "parameters_cloud.h"
 #include "triangle_mesh.h"

@@ -24,6 +24,7 @@
 #ifndef _parameters_terrain_h_
 #define _parameters_terrain_h_
 
+#include "common.h"
 #include "parameters_noise.h"
 #include "parameters_object.h"
 #include "rgb.h"

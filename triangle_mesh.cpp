@@ -17,8 +17,6 @@
 /*  along with Fracplanet.  If not, see <http://www.gnu.org/licenses/>.   */
 /**************************************************************************/
 
-#include "precompiled.h"
-
 #include "triangle_mesh.h"
 
 TriangleMesh::TriangleMesh(Progress* progress)
@@ -301,8 +299,8 @@ void TriangleMesh::write_povray(std::ofstream& out,bool exclude_alternate_colour
  */
 void TriangleMesh::write_blender(std::ofstream& out,const std::string& mesh_name,const FloatRGBA* faux_alpha) const
   {
-    std::auto_ptr<ByteRGBA> byte_faux_alpha;
-    if (faux_alpha) byte_faux_alpha=std::auto_ptr<ByteRGBA>(new ByteRGBA(*faux_alpha));
+    std::unique_ptr<ByteRGBA> byte_faux_alpha;
+    if (faux_alpha) byte_faux_alpha=std::unique_ptr<ByteRGBA>(new ByteRGBA(*faux_alpha));
 
     const uint steps=vertices()+triangles();
     uint step=0;

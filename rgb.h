@@ -26,6 +26,8 @@
 #ifndef _image_rgb_h_
 #define _image_rgb_h_
 
+#include "common.h"
+
 /*! Direct access to class members is permitted.
   The uchar version is intended as a minimal class for efficient storage of colours.
   (However, padding means there is a wasted byte if we just want RGB so we

@@ -17,8 +17,6 @@
 /*  along with Fracplanet.  If not, see <http://www.gnu.org/licenses/>.   */
 /**************************************************************************/
 
-#include "precompiled.h"
-
 #include "control_about.h"
 
 #include "license.h"

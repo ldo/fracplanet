@@ -24,6 +24,8 @@
 #ifndef _triangle_edge_h_
 #define _triangle_edge_h_
 
+#include "common.h"
+
 //! Class to store triangle edges.
 /*! An edge is described by two vertices.
  These are ordered internally for more efficient sorting and comparison.

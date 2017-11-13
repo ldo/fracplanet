@@ -17,8 +17,6 @@
 /*  along with Fracplanet.  If not, see <http://www.gnu.org/licenses/>.   */
 /**************************************************************************/
 
-#include "precompiled.h"
-
 #include "triangle_mesh_viewer.h"
 
 /*! The viewer will be parented on the specified widget, 

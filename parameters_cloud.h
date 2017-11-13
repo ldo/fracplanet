@@ -24,6 +24,7 @@
 #ifndef _parameters_cloud_h_
 #define _parameters_cloud_h_
 
+#include "common.h"
 #include "parameters_object.h"
 #include "rgb.h"
 #include "xyz.h"

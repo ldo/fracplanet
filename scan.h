@@ -24,6 +24,7 @@
 #ifndef _scan_h_
 #define _scan_h_
 
+#include "common.h"
 #include "xyz.h"
 
 //! Encapsulates information needed for scan conversion.

@@ -17,8 +17,6 @@
 /*  along with Fracplanet.  If not, see <http://www.gnu.org/licenses/>.   */
 /**************************************************************************/
 
-#include "precompiled.h"
-
 #include "parameters_terrain.h"
 
 /*! \todo: Might be better (more portable) to use QTime::currentTime () for random seeds.

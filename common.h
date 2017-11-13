@@ -20,12 +20,6 @@
 #ifndef _common_h_
 #define _common_h_
 
-#ifdef __sparc__
-# This is a workround for Debian bug #485434
-# expected to be removable in future (post-Lenny)
-#define BOOST_SP_USE_PTHREADS
-#endif
-
 extern "C"
 {
 #include <stdlib.h>
@@ -34,6 +28,7 @@ extern "C"
 
 #include <cassert>
 #include <cmath>
+#include <cstdint>
 #include <deque>
 #include <fstream>
 #include <iomanip>

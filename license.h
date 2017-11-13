@@ -24,6 +24,8 @@
 #ifndef _license_h
 #define _license_h_
 
+#include "common.h"
+
 //! String containing code license.
 extern const char*const license_string;
 

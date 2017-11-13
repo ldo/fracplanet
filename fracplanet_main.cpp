@@ -17,8 +17,6 @@
 /*  along with Fracplanet.  If not, see <http://www.gnu.org/licenses/>.   */
 /**************************************************************************/
 
-#include "precompiled.h"
-
 #include "fracplanet_main.h"
 
 #include "image.h"
@@ -61,7 +59,7 @@ void FracplanetMain::progress_start(uint target,const std::string& info)
 {
   if (!progress_dialog.get())
     {
-      progress_dialog=std::auto_ptr<QProgressDialog>(new QProgressDialog("Progress","Cancel",0,100,this));
+      progress_dialog=std::unique_ptr<QProgressDialog>(new QProgressDialog("Progress","Cancel",0,100,this));
       progress_dialog->setWindowModality(Qt::WindowModal);
 
       progress_dialog->setCancelButton(0);  // Cancel not supported
@@ -157,14 +155,14 @@ void FracplanetMain::regenerate()   //! \todo Should be able to retain ground or
     {
     case ParametersObject::ObjectTypePlanet:
       {
-    std::auto_ptr<TriangleMeshTerrainPlanet> it(new TriangleMeshTerrainPlanet(parameters_terrain,this));
+    std::unique_ptr<TriangleMeshTerrainPlanet> it(new TriangleMeshTerrainPlanet(parameters_terrain,this));
     meshes.push_back(it.get());
     mesh_terrain.reset(it.release());
     break;
       }
     default:
       {
-    std::auto_ptr<TriangleMeshTerrainFlat> it(new TriangleMeshTerrainFlat(parameters_terrain,this));
+    std::unique_ptr<TriangleMeshTerrainFlat> it(new TriangleMeshTerrainFlat(parameters_terrain,this));
     meshes.push_back(it.get());
     mesh_terrain.reset(it.release());
     break;
@@ -177,14 +175,14 @@ void FracplanetMain::regenerate()   //! \todo Should be able to retain ground or
     {
     case ParametersObject::ObjectTypePlanet:
       {
-        std::auto_ptr<TriangleMeshCloudPlanet> it(new TriangleMeshCloudPlanet(parameters_cloud,this));
+        std::unique_ptr<TriangleMeshCloudPlanet> it(new TriangleMeshCloudPlanet(parameters_cloud,this));
         meshes.push_back(it.get());
         mesh_cloud.reset(it.release());
         break;
       }
     default:
       {
-        std::auto_ptr<TriangleMeshCloudFlat> it(new TriangleMeshCloudFlat(parameters_cloud,this));
+        std::unique_ptr<TriangleMeshCloudFlat> it(new TriangleMeshCloudFlat(parameters_cloud,this));
         meshes.push_back(it.get());
         mesh_cloud.reset(it.release());
         break;

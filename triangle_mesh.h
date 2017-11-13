@@ -20,6 +20,7 @@
 #ifndef _triangle_mesh_h_
 #define _triangle_mesh_h_
 
+#include "common.h"
 #include "geometry.h"
 #include "parameters_save.h"
 #include "parameters_terrain.h"

@@ -24,6 +24,7 @@
 #ifndef _fracplanet_main_h_
 #define _fracplanet_main_h_
 
+#include "common.h"
 #include "control_about.h"
 #include "control_render.h"
 #include "control_save.h"
@@ -100,7 +101,7 @@ class FracplanetMain : public QWidget,public Progress
 
   uint last_step;
 
-  std::auto_ptr<QProgressDialog> progress_dialog;
+  std::unique_ptr<QProgressDialog> progress_dialog;
   std::string progress_info;
   bool progress_was_stalled;
 };

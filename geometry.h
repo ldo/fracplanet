@@ -24,6 +24,7 @@
 #ifndef _geometry_h_
 #define _geometry_h_
 
+#include "common.h"
 #include "scan.h"
 #include "vertex.h"
 #include "xyz.h"

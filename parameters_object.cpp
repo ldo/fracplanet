@@ -17,14 +17,12 @@
 /*  along with Fracplanet.  If not, see <http://www.gnu.org/licenses/>.   */
 /**************************************************************************/
 
-#include "precompiled.h"
-
 #include "parameters_object.h"
 
 ParametersObject::ParametersObject()
   :object_type(ObjectTypePlanet)
   ,seed(time(0))
-  ,subdivisions(5)
+  ,subdivisions(8)
 {}
 
 ParametersObject::~ParametersObject()

@@ -24,6 +24,7 @@
 #ifndef _xyz_h_
 #define _xyz_h_
 
+#include "common.h"
 #include "random.h"
 
 //! Class to hold vectors in 3D cartesian co-ordinates.

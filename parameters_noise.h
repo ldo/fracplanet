@@ -24,6 +24,8 @@
 #ifndef _parameters_noise_h_
 #define _parameters_noise_h_
 
+#include "common.h"
+
 class ParametersNoise
 {
  public:

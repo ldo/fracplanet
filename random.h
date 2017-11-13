@@ -24,6 +24,8 @@
 #ifndef _random_h_
 #define _random_h_
 
+#include "common.h"
+
 //! Generates random numbers in the range [0,1).
 class Random01
 {

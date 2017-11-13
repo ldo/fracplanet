@@ -24,6 +24,7 @@
 #ifndef _matrix33_h_
 #define _matrix33_h_
 
+#include "common.h"
 #include "xyz.h"
 
 //! Class to hold 3x3 matrics

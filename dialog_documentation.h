@@ -24,6 +24,8 @@
 #ifndef _dialog_documentation_h_
 #define _dialog_documentation_h_
 
+#include "common.h"
+
 //! Provides a dialog box with some user documentation.
 class DialogDocumentation : public QDialog
 {

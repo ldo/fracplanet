@@ -24,6 +24,7 @@
 #ifndef _vertex_h_
 #define _vertex_h_
 
+#include "common.h"
 #include "rgb.h"
 #include "xyz.h"
 

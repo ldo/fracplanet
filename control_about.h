@@ -24,6 +24,7 @@
 #ifndef _control_about_h_
 #define _control_about_h_
 
+#include "common.h"
 #include "control.h"
 
 //! Displays "About" type info

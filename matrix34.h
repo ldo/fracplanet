@@ -24,6 +24,7 @@
 #ifndef _matrix34_h_
 #define _matrix34_h_
 
+#include "common.h"
 #include "matrix33.h"
 #include "xyz.h"
 

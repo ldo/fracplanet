@@ -24,6 +24,7 @@
 #ifndef _control_h_
 #define _control_h_
 
+#include "common.h"
 #include "rgb.h"
 
 //! Base class for other controls; useful for shared stuff.

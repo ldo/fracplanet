@@ -21,8 +21,6 @@
   \brief Implementation for class ByteRGBA and class FloatRGBA.
 */
 
-#include "precompiled.h"
-
 #include "rgb.h"
 
 std::ostream& ByteRGBA::write(std::ostream& out) const

@@ -24,6 +24,8 @@
 #ifndef _parameters_save_h_
 #define _parameters_save_h_
 
+#include "common.h"
+
 class ParametersRender;
 
 //! Aggregates controllable parameters for all things related to save.

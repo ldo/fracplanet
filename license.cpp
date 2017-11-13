@@ -21,8 +21,6 @@
   \brief License string boilerplate.
 */
 
-#include "precompiled.h"
-
 #include "license.h"
 
 //! \todo Currently emits a warning about multi-line string.  Replace line breaks with backslash-n instead.

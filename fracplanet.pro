@@ -1,13 +1,13 @@
 TARGET = fracplanet
 TEMPLATE = app
 
-CONFIG+= qt stl precompile_header exceptions release  # debug/release
+CONFIG+= qt stl exceptions release  # debug/release
 QT += opengl
 
 PRECOMPILED_HEADER = precompiled.h
 
-HEADERS += $$system(ls *.h)
-SOURCES += $$system(ls *.cpp)
+HEADERS += $$files(*.h)
+SOURCES += $$files(*.cpp)
 LIBS += -lboost_program_options -lGLU
 
 DEFINES += QT_DLL

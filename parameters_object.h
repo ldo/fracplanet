@@ -24,6 +24,8 @@
 #ifndef _parameters_h_
 #define _parameters_h_
 
+#include "common.h"
+
 //! Common base for ParametersTerrain and ParametersCloud.
 class ParametersObject
 {

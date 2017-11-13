@@ -24,6 +24,7 @@
 #ifndef _control_terrain_h_
 #define _control_terrain_h_
 
+#include "common.h"
 #include "parameters_terrain.h"
 #include "parameters_cloud.h"
 #include "control.h"

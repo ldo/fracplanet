@@ -1,3 +1,5 @@
+- Needed for Debian "buster": use Qt5
+
 - Suggestions from HolgerOhmacht:
 
 1. missing equatorial mass distribution of rotational  spheric objects in space (by planet option)

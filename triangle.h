@@ -24,6 +24,7 @@
 #ifndef _triangle_h_
 #define _triangle_h_
 
+#include "common.h"
 #include "rgb.h"
 #include "xyz.h"
 

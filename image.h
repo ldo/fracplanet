@@ -24,6 +24,7 @@
 #ifndef _image_h_
 #define _image_h_
 
+#include "common.h"
 #include "rgb.h"
 
 class Progress;
