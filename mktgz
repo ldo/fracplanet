@@ -9,7 +9,7 @@ DIR=${PWD##*/}
 
 cd ..
 
-PRUNE='-name moc -prune -o -name obj -prune -o -name pkg_* -prune -o -name usage_text.h -prune'
+PRUNE='-name moc -prune -o -name obj -prune -o -name pkg_* -prune'
 
 FILES_MISC=`ls ${DIR}/{README,BUILD.sh,LICENSE,TODO,NEWS,BUGS,VERSION,THANKS,doxygen.cfg,mktgz,mkdeb,fracplanet.css,fracplanet.htm,fracplanet.menu,htm_to_qml.xsl}`
 FILES_PRO=`find ${DIR} ${PRUNE} -o -name '*.pro' -print`
