@@ -40,10 +40,11 @@ void Geometry::scan_convert_common
   const float y01=v[sort[1]].y-v[sort[0]].y;
   const float x12=v[sort[2]].x-v[sort[1]].x;
   const float y12=v[sort[2]].y-v[sort[1]].y;
-  
-  boost::optional<float> ky02;
-  boost::optional<float> ky01;
-  boost::optional<float> ky12;
+
+  // Use "complete" make_optional to avoid a maybe-used-uninitialized warning later.
+  boost::optional<float> ky02=boost::make_optional(false,0.0f);
+  boost::optional<float> ky01=boost::make_optional(false,0.0f);
+  boost::optional<float> ky12=boost::make_optional(false,0.0f);
   
   if (y02==0.0f) return;
   

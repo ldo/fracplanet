@@ -1,30 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-if [ -z "$QTDIR" ] ; then
-  echo "QTDIR not defined"
-  echo "You almost certainly need QTDIR defined and pointing at your QT installation"
-  echo "If you know different, edit ./configure and remove this test."
-  exit 1
-fi
-
-echo "Your qmake version is:"
-qmake --version
- 
-echo
-echo "Your gcc version is (unless qmake is set up to use a different one):"
-gcc --version
-
-echo
 echo "Building built-in user manual..."
 if ! xsltproc -stringparam version `./VERSION` -html htm_to_qml.xsl fracplanet.htm | sed 's/"/\\"/g' | sed 's/^/"/g' | sed 's/$/\\n"/g'> usage_text.h ; then echo "Couldn't build usage_text.h" ; fi
 if ! test -s usage_text.h ; then echo "\"Full built-in user documentation not available due to problem during build configuration.  Maybe the builder didn't have xsltproc or sed installed ?\"" > usage_text.h ; echo "Something went wrong, used built-in user documentation fallback plan"; fi
 echo "...built built-in user documentation"
-
-VERSION_NUMBER=`./VERSION`
-
-echo
-echo "Running qmake..."
-
-qmake -makefile "VERSION_NUMBER=$VERSION_NUMBER" "$*" fracplanet.pro
-
-echo "...configuration completed - ready to do 'make' now"

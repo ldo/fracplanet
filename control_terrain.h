@@ -25,9 +25,10 @@
 #define _control_terrain_h_
 
 #include "common.h"
+#include "control.h"
 #include "parameters_terrain.h"
 #include "parameters_cloud.h"
-#include "control.h"
+#include "qtcommon.h"
 
 class FracplanetMain;
 

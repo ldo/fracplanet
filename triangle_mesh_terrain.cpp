@@ -19,6 +19,8 @@
 
 #include "triangle_mesh_terrain.h"
 
+#include <map>
+
 #include "noise.h"
 
 TriangleMeshTerrain::TriangleMeshTerrain(Progress* progress)

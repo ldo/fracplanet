@@ -26,6 +26,7 @@
 
 #include "common.h"
 #include "parameters_render.h"
+#include "qtcommon.h"
 #include "random.h"
 #include "triangle_mesh.h"
 #include "triangle_mesh_viewer_display.h"

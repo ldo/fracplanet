@@ -11,7 +11,7 @@ cd ..
 
 PRUNE='-name moc -prune -o -name obj -prune -o -name pkg_* -prune -o -name usage_text.h -prune'
 
-FILES_MISC=`ls ${DIR}/{README,BUILD,LICENSE,TODO,NEWS,BUGS,VERSION,THANKS,configure,doxygen.cfg,mktgz,mkdeb,fracplanet.css,fracplanet.htm,fracplanet.menu,htm_to_qml.xsl}`
+FILES_MISC=`ls ${DIR}/{README,BUILD.sh,LICENSE,TODO,NEWS,BUGS,VERSION,THANKS,doxygen.cfg,mktgz,mkdeb,fracplanet.css,fracplanet.htm,fracplanet.menu,htm_to_qml.xsl}`
 FILES_PRO=`find ${DIR} ${PRUNE} -o -name '*.pro' -print`
 FILES_MAN=`find ${DIR}/man ${PRUNE} -o -name '*.1'   -print`
 FILES_H=`find ${DIR} ${PRUNE} -o -name '*.h'   -print`

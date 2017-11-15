@@ -26,6 +26,7 @@
 
 #include "common.h"
 #include "control.h"
+#include "qtcommon.h"
 
 //! Displays "About" type info
 class ControlAbout : public Control

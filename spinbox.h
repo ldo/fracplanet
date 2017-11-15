@@ -24,6 +24,7 @@
 #define _spinbox_h_
 
 #include "common.h"
+#include "qtcommon.h"
 
 class SpinBox : public QSpinBox
 {

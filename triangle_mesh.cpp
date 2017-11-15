@@ -19,6 +19,8 @@
 
 #include "triangle_mesh.h"
 
+#include <map>
+
 TriangleMesh::TriangleMesh(Progress* progress)
   :_triangle_switch_colour(0)
    ,_emissive(0.0)

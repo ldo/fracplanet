@@ -1,4 +1,9 @@
-In 0.5.0:
+Release 0.5.1:
+ - Tweaks for Debian/buster.
+ - Rename BUILD to BUILD.sh; ditch configure; move built-in USAGE processing to USAGE-update.sh and put usage_text.h under version control.
+ - Some tweaks to code; split Qt includes from common.h to qtcommon.h
+
+Release 0.5.0:
  - Verified works with Qt 5.9.1 ("official" Qt release) and g++ 6.3.0 (Debian Stretch version)
  - Ditch use of precompiled headers; compilers are awesome these days.
  - Increase initial subdivision level to 8.

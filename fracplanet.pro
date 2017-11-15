@@ -4,8 +4,6 @@ TEMPLATE = app
 CONFIG+= qt stl exceptions release  # debug/release
 QT += opengl
 
-PRECOMPILED_HEADER = precompiled.h
-
 HEADERS += $$files(*.h)
 SOURCES += $$files(*.cpp)
 LIBS += -lboost_program_options -lGLU
@@ -13,7 +11,7 @@ LIBS += -lboost_program_options -lGLU
 DEFINES += QT_DLL
 
 #######################################
-# Version numbering.  This is ENTIRELY controlled by what is echoed by the VERSION script
+# Version numbering.  VERSION_NUMBER=x.x.x should be set on qmake arguments.
 
 QMAKE_CXXFLAGS_RELEASE += '-DFRACPLANET_VERSION="$$VERSION_NUMBER"'
 QMAKE_CXXFLAGS_DEBUG   += '-DFRACPLANET_VERSION="$$VERSION_NUMBER"'
@@ -33,8 +31,6 @@ QMAKE_CFLAGS_RELEASE += -DNDEBUG
 # Other stuff:
 # Disable implicit cast from QString to char*
 
-# If have trouble on sparc add -pthread -DBOOST_SP_USE_PTHREADS as a workround for debian bug 485434 
-# seems to cause trouble on x86 though so not used by default.
 QMAKE_CXXFLAGS_RELEASE += -DQT_NO_ASCII_CAST
 QMAKE_CXXFLAGS_DEBUG += -DQT_NO_ASCII_CAST
 

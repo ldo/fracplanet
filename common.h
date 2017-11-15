@@ -20,23 +20,16 @@
 #ifndef _common_h_
 #define _common_h_
 
-extern "C"
-{
-#include <stdlib.h>
-#include <time.h>
-}
-
 #include <cassert>
 #include <cmath>
 #include <cstdint>
-#include <deque>
+#include <cstdlib>
+#include <ctime>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <map>
 #include <memory>
 #include <numeric>
-#include <set>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -46,53 +39,10 @@ extern "C"
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/optional.hpp>
-#include <boost/program_options/errors.hpp>
-#include <boost/program_options/options_description.hpp>
-#include <boost/program_options/parsers.hpp>
-#include <boost/program_options/variables_map.hpp>
 #include <boost/random.hpp>
 #include <boost/range.hpp>
 #include <boost/scoped_array.hpp>
 #include <boost/scoped_ptr.hpp>
-
-#include <QApplication>
-#include <QButtonGroup>
-#include <QCheckBox>
-#include <QComboBox>
-#include <QColorDialog>
-#include <QCursor>
-#include <QDateTime>
-#include <QDialog>
-#include <QFileDialog>
-#include <QFont>
-#include <QGridLayout>
-#include <QGroupBox>
-#include <QKeyEvent>
-#include <QIcon>
-#include <QLabel>
-#include <QLineEdit>
-#include <QMessageBox>
-#include <QObject>
-#include <QProgressDialog>
-#include <QPushButton>
-#include <QRadioButton>
-#include <QSlider>
-#include <QSpinBox>
-#include <QStatusBar>
-#include <QTabWidget>
-#include <QTextBrowser>
-#include <QTextEdit>
-#include <QTime>
-#include <QTimer>
-#include <QToolTip>
-#include <QVBoxLayout>
-#include <QWidget>
-
-#define GL_GLEXT_PROTOTYPES
-#include <GL/gl.h>
-#include <GL/glext.h>
-
-#include <QtOpenGL/qgl.h>
 
 #define stringify(S) __STRING(S)
 

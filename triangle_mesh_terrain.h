@@ -24,6 +24,8 @@
 #ifndef _triangle_mesh_terrain_h_
 #define _triangle_mesh_terrain_h_
 
+#include <set>
+
 #include "common.h"
 #include "image.h"
 #include "parameters_terrain.h"
