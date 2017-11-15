@@ -1,7 +1,7 @@
 ABOUT
 =====
-Fracplanet generates random planets and terrain with oceans, 
-mountains, icecaps and rivers.  Parameters are specified interactively 
+Fracplanet generates random planets and terrain areas with oceans, 
+mountains, icecaps, lakes and rivers.  Parameters are specified interactively 
 and the results displayed using OpenGL.  The generated objects can be
 exported as Pov-Ray or Blender models, or as textures.
 
@@ -31,34 +31,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 BUILDING
 ========
-Either use the traditional
- ./configure
- make
-(NB The configure script is NOT autoconf generated
-and none of the usual autoconf options work)
 
-Or just have both done for you by running 
-  ./BUILD
-(which also adds $QTDIR/bin to the PATH while running the above commands;
-this may be useful on the many distros which don't have qmake in the default
-user path).
+Either
+  qmake VERSION_NUMBER=x.x.x && qmake
+or
+  ./BUILD.sh
+will do the same thing using the version number from ./VERSION.
+(BUILD.sh assumes a Debian qt setup where a -qt=5 option can be used to select qt version; -qt=4 should also work).
 
-NB In either case you almost certainly DO need your QTDIR 
-environment variable to be correctly defined.
-
-This will give you a "fracplanet" executable which you can run with
+This should give you a "fracplanet" executable which you can run with
   ./fracplanet
 or copy to wherever you like (see INSTALL section below).
 
-If you have xsltproc (and sed) installed then you should get a copy of the
-fracplanet.htm documentation built into the application.
-
-[The author primarily uses Debian Sarge these days].
-
-[Selden E Ball Jr reports that "FracPlanet v0.2 builds and runs
-with no errors under the current version of Cygwin for Windows. 
-Of course, the appropriate optional software development subsets
-have to be installed."]
+Besides the basic manual page in man/man1/fracplanet.1. there's some usage documentation in fracplanet.htm.
+This is processed into a usage_text.h included in the build by the builtin-docs-update.sh script.
+But usage_text.h is under version control and bundled in the release tarball so there shouldn't be any need to run builtin-docs-update.sh unless you edit fracplanet.htm.
 
 BUILD OPTIONS
 =============
@@ -67,22 +54,6 @@ so to change compile options you should mess with the fracplanet.pro
 (if you do change it, do a "make distclean" before 
 you rebuild to make sure Makefiles are rebuilt)
 or provide overrides on qmake's command line. 
-An example of how to do this is provided by the
-  configure-custom
-script, but note that details may well be different on your system.
-On the author's P4 system the extra optimisation options make no
-measurable difference to the application performance (to either
-the display framerate or mesh generation times).
-
-BUILD PROBLEMS
-==============
-- Recent versions of gcc may output a lot of warnings about Qt's
-lack of virtual destructors.  Don't worry about them.
-- For a Debian system with nvidia-glx installed it may be
-necessary to have nvidia-glx-dev installed when you build, otherwise 
-the application may not function properly.  Note that binaries
-built in an nvidia-free pbuilder environment seem to run fine on an
-nvidia accelerated system.
 
 USAGE
 =====
@@ -108,16 +79,13 @@ display) is the degree of subdivision.  For 9 subdivisions
 (for a planet) around 260MB of memory is required.  10 subdivisions
 needs just over a gigabyte.  Needless to say, if it starts swapping,
 it's not pretty.
-On a 2.4GHz machine with a GeForce4 (well, an "MX") and the Nvidia OpenGL
-drivers display rates start to suffer around subdivision level 7 (for planets).
-A NVidia 5200 will get to the next level.  
-See the BUGS file for other issues.
+Generation of rivers and lakes can also be time consuming.
 
 FSAA/MULTISAMPLING
 ==================
-On the author's GeForce7600 system, the standard Qt3 built
-fracplanet runs nicely antialiased simply by doing
+In the past, fracplanet has been got to run nicely antialiased on NVidia hardware and drivers simply by doing
   __GL_FSAA_MODE=7 ./fracplanet
+Check your graphics card's documentation for current relevant options.
 
 INSTALL
 =======
