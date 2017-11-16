@@ -7,7 +7,7 @@
 "<h1>\n"
 "  Fracplanet user manual\n"
 "</h1>\n"
-"<p>Version: 0.5.1dev</p>\n"
+"<p>Version: 0.5.1</p>\n"
 "\n"
 "<h2>Introduction</h2>\n"
 "\n"
